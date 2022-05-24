@@ -1,6 +1,5 @@
 import React from "react";
-import "./App.css"
-const App = () => {
-    return <div className="App">Application Online!</div>
-}
+import TodoList from "./todos/TodoList";
+import "./App.css";
+const App = () => <div className="App"><TodoList /></div>
 export default App;
