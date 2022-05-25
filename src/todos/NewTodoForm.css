@@ -23,6 +23,6 @@
     outline: none;
     cursor: pointer;
     margin-left: 8px;
-    width: 20%;
+    width: auto;
     background-color: #22ee22;
 }

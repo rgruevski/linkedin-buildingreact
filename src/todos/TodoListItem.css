@@ -7,6 +7,11 @@
     box-shadow: 0 4px 8px grey;
 }
 
+.todo-text-container {
+    display: inline-block;
+    padding-right: 20px;
+}
+
 .buttons-container {
     position: absolute;
     right: 12px;

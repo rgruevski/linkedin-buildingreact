@@ -1,6 +1,7 @@
 import {
     createTodo,
     removeTodo,
+    markTodoAsCompleted,
     loadTodosInProgress,
     loadTodosSuccess,
     loadTodosFailure
@@ -17,7 +18,7 @@ export const loadTodos = () => async (dispatch, getState) => {
         dispatch(loadTodosFailure());
         dispatch(displayAlert(error))
     }
-}
+};
 
 export const addTodoRequest = text => async dispatch => {
     try {
@@ -34,7 +35,7 @@ export const addTodoRequest = text => async dispatch => {
     } catch (error) {
         dispatch(displayAlert(error));
     }
-}
+};
 
 export const removeTodoRequest = id => async dispatch => {
     try {
@@ -46,23 +47,22 @@ export const removeTodoRequest = id => async dispatch => {
     } catch (error) {
         dispatch(displayAlert(error));
     }
-}
+};
 
-export const markTodoComplete = id => async dispatch => {
+export const markTodoAsCompletedRequest = id => async dispatch => {
     try {
-        const response = await fetch(`http://192.168.1.114:8080/`, {
+        const response = await fetch(`http://192.168.1.114:8080/todos/${id}/completed`, {
             headers: {
                 "Content-Type": "application/json"
             },
-            method: "post",
-            body
+            method: "post"
         });
-        const completedTodo = await response.json();
-        dispatch(markTodoComplete(completedTodo));
+        const updatedTodo = await response.json();
+        dispatch(markTodoAsCompleted(updatedTodo));
     } catch (error) {
         dispatch(displayAlert(error));
     }
-}
+};
 
 export const displayAlert = text => () => {
     return (

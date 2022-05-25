@@ -3,12 +3,14 @@ import "./TodoListItem.css"
 const TodoListItem = ({ todo, onRemovePressed, onCompletedPressed }) => {
     return (
         <div className="todo-item-container">
-            <h3>{todo.text}</h3>
+            <div className="todo-text-container">
+                <h3>{todo.text}</h3>
+            </div>
             <div>
                 <div className="buttons-container">
                     {todo.isCompleted ? null :
                         <button
-                            onClick={() => onCompletedPressed(todo.text)}
+                            onClick={() => onCompletedPressed(todo.id)}
                             className="completed-button">
                             Mark As Completed
                         </button>}
