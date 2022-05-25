@@ -1,14 +1,66 @@
-import { loadTodosInProgress, loadTodosSuccess, loadTodosFailure } from "./actions";
+import {
+    createTodo,
+    removeTodo,
+    loadTodosInProgress,
+    loadTodosSuccess,
+    loadTodosFailure
+} from "./actions";
+
 export const loadTodos = () => async (dispatch, getState) => {
     try {
-        dispatch(loadTodosInProgress());
-        const response = await fetch("http://localhost:8080/todos");
+        dispatch(loadTodosInProgress(getState));
+        const response = await fetch("http://192.168.1.114:8080/todos-delay");
         const todos = await response.json();
-        
+
         dispatch(loadTodosSuccess(todos));
     } catch (error) {
         dispatch(loadTodosFailure());
         dispatch(displayAlert(error))
+    }
+}
+
+export const addTodoRequest = text => async dispatch => {
+    try {
+        const body = JSON.stringify({ text });
+        const response = await fetch("http://192.168.1.114:8080/todos", {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "post",
+            body
+        });
+        const todo = await response.json();
+        dispatch(createTodo(todo));
+    } catch (error) {
+        dispatch(displayAlert(error));
+    }
+}
+
+export const removeTodoRequest = id => async dispatch => {
+    try {
+        const response = await fetch(`http://192.168.1.114:8080/todos/${id}`, {
+            method: "delete"
+        });
+        const removedTodo = await response.json();
+        dispatch(removeTodo(removedTodo));
+    } catch (error) {
+        dispatch(displayAlert(error));
+    }
+}
+
+export const markTodoComplete = id => async dispatch => {
+    try {
+        const response = await fetch(`http://192.168.1.114:8080/`, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "post",
+            body
+        });
+        const completedTodo = await response.json();
+        dispatch(markTodoComplete(completedTodo));
+    } catch (error) {
+        dispatch(displayAlert(error));
     }
 }
 
