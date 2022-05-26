@@ -12,14 +12,19 @@ import {
     removeTodoRequest,
     markTodoAsCompletedRequest
 } from "./thunks";
-import "./TodoList.css";
+import styled from "styled-components";
+const ListWrapper = styled.div`
+        max-width: 700px;
+        width: auto;
+        margin: auto;
+`;
 const TodoList = ({ completedTodos, incompleteTodos, onRemovePressed, onCompletedPressed, isLoading, startLoadingTodos }) => {
     useEffect(() => {
         startLoadingTodos();
     }, []);
     const loadingMessage = <div>Loading todos...</div>
     const content = (
-        <div className="list-wrapper">
+        <ListWrapper>
             <NewTodoForm />
             <h3>Incomplete:</h3>
             {incompleteTodos.map((todo, index) =>
@@ -35,12 +40,11 @@ const TodoList = ({ completedTodos, incompleteTodos, onRemovePressed, onComplete
                     todo={todo}
                     onRemovePressed={onRemovePressed}
                     onCompletedPressed={onCompletedPressed} />)}
-        </div>
+        </ListWrapper>
     );
-    const results = isLoading ? loadingMessage : content;
-
-    return results;
+    return isLoading ? loadingMessage : content;
 };
+
 const mapStateToProps = state => ({
     isLoading: getTodosLoading(state),
     completedTodos: getCompletedTodos(state),
