@@ -10,7 +10,6 @@ const FormContainer = styled.div`
     box-shadow: 0 4px 8px grey;
 `;
 const NewTodoInput = styled.input`
-    display: inline-flex;
     font-size: 14px;
     padding: 8px;
     border: none;
@@ -20,7 +19,6 @@ const NewTodoInput = styled.input`
     outline: none;
 `;
 const NewTodoButton = styled.button`
-    display: inline-flex;
     font-size: 16px;
     padding: 8px;
     border: none;

@@ -1,16 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-const TodoItemContainer = styled.div`
+const ItemContainer = styled.div`
     background: #fff;
     border-radius: 8px;
-    border-bottom: ${(props => (new Date(props.createdAt) > new Date(Date.now() - 8640000 * 5))
-        ? "none"
-        : "2px solid red")};
     margin-top: 8px;
     padding: 16px;
     position: relative;
     box-shadow: 0 4px 8px grey;
 `;
+
+const UrgentItemStyle = styled(ItemContainer)`
+    border-bottom: ${(props => (new Date(props.createdAt) > new Date(Date.now() - 8640000 * 5))
+        ? "none"
+        : "2px solid red")};
+    `;
+
 const ButtonsContainer = styled.div`
     position: absolute;
     right: 12px;
@@ -38,6 +42,7 @@ const RemoveButtonStyled = styled.button`
     margin-left: 8px;
 `;
 const TodoListItem = ({ todo, onRemovePressed, onCompletedPressed }) => {
+    const TodoItemContainer = todo.isCompleted ? ItemContainer : UrgentItemStyle;
     return (
         <TodoItemContainer>
             <h3>{todo.text}</h3>
