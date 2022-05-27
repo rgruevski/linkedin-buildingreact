@@ -6,10 +6,10 @@ export const getTodosLoading = state => state.todos.isLoading;
 
 export const getIncompleteTodos = createSelector(
     getTodos,
-    (todos) => (todos?.filter(todo => !todo?.isCompleted ?? false) ?? []),
+    (todos) => (todos?.filter(todo => !todo?.isCompleted ?? 0) ?? []),
 );
 
 export const getCompletedTodos = createSelector(
     getTodos,
-    (todos) => (todos?.filter(todo => todo?.isCompleted ?? false) ?? []),
+    (todos) => (todos?.filter(todo => todo?.isCompleted ?? 0) ?? []),
 ); 
