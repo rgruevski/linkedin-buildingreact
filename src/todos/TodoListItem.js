@@ -8,19 +8,17 @@ const ItemContainer = styled.div`
     position: relative;
     box-shadow: 0 4px 8px grey;
 `;
-
 const UrgentItemStyle = styled(ItemContainer)`
-    border-bottom: ${(props => (new Date(props.createdAt) > new Date(Date.now() - 8640000 * 5))
+    border-bottom: ${props => (new Date(props.createdAt) > new Date(Date.now() - 86400000 * 5))
         ? "none"
-        : "2px solid red")};
-    `;
-
+        : "2px solid red"};
+`;
 const ButtonsContainer = styled.div`
     position: absolute;
     right: 12px;
     bottom: 12px;
 `;
-const CompletedButtonStyled = styled.button`
+const Button = styled.button`
     font-size: 16px;
     padding: 8px;
     border: none;
@@ -28,37 +26,30 @@ const CompletedButtonStyled = styled.button`
     outline: none;
     cursor: pointer;
     display: inline-block;
+`;
+const CompleteButton = styled(Button)`
     background-color: #22ee22;
 `;
-const RemoveButtonStyled = styled.button`
-    font-size: 16px;
-    padding: 8px;
-    border: none;
-    border-radius: 8px;
-    outline: none;
-    cursor: pointer;
-    display: inline-block;
+const RemoveButton = styled(Button)`
     background-color: #ee2222;
     margin-left: 8px;
 `;
 const TodoListItem = ({ todo, onRemovePressed, onCompletedPressed }) => {
     const TodoItemContainer = todo.isCompleted ? ItemContainer : UrgentItemStyle;
     return (
-        <TodoItemContainer>
+        <TodoItemContainer createdAt={todo.createdAt}>
             <h3>{todo.text}</h3>
-            <p>
-                Created at:&nbsp;
-                {(new Date(todo.createdAt)).toLocaleDateString()}
+            <p>Created at:&nbsp;{(new Date(todo.createdAt)).toLocaleDateString()}
             </p>
             <ButtonsContainer>
-                <CompletedButtonStyled
-                    onClick={() => onCompletedPressed(todo.id)}>
-                    Mark As Completed
-                </CompletedButtonStyled>
-                <RemoveButtonStyled
-                    onClick={() => onRemovePressed(todo.id)}>
-                    Remove
-                </RemoveButtonStyled>
+                {todo.isCompleted
+                    ? null
+                    : <CompleteButton
+                        onClick={() => onCompletedPressed(todo.id)}>Mark as Completed</CompleteButton>
+                }
+                <RemoveButton
+                
+                    onClick={() => onRemovePressed(todo.id)}>Remove</RemoveButton>
             </ButtonsContainer>
         </TodoItemContainer>
     );
