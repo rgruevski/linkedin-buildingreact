@@ -13,6 +13,11 @@ const UrgentItemStyle = styled(ItemContainer)`
         ? "none"
         : "2px solid red"};
 `;
+
+export const getBorderStyleForDate = (startingDate, current) => (startingDate > new Date(current - 86400000 * 5)
+    ? "none"
+    : "2px solid red");
+
 const ButtonsContainer = styled.div`
     position: absolute;
     right: 12px;
@@ -39,8 +44,7 @@ const TodoListItem = ({ todo, onRemovePressed, onCompletedPressed }) => {
     return (
         <TodoItemContainer createdAt={todo.createdAt}>
             <h3>{todo.text}</h3>
-            <p>Created at:&nbsp;{(new Date(todo.createdAt)).toLocaleDateString()}
-            </p>
+            <p>Created at:&nbsp;{(new Date(todo.createdAt)).toLocaleDateString()}</p>
             <ButtonsContainer>
                 {todo.isCompleted
                     ? null

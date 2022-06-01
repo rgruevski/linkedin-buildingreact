@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "npx webpack-dev-server --mode development",
     "build": "npx webpack --mode development",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha \"src/**/*.test.js\" --require @babel/register --recursive"
   },
   "keywords": [
     "todo",
@@ -20,8 +20,15 @@
     "@babel/plugin-transform-runtime": "^7.18.0",
     "@babel/preset-env": "^7.18.0",
     "@babel/preset-react": "^7.17.12",
+    "@babel/register": "^7.17.7",
     "babel-loader": "^8.2.5",
+    "chai": "^4.3.6",
     "css-loader": "^6.7.1",
+    "fetch": "^1.1.0",
+    "mocha": "^10.0.0",
+    "mock": "^0.1.1",
+    "node-fetch": "^2.6.1",
+    "sinon": "^14.0.0",
     "style-loader": "^3.3.1",
     "webpack": "^5.72.1",
     "webpack-cli": "^4.9.2",
@@ -30,6 +37,7 @@
   "dependencies": {
     "@babel/runtime": "^7.18.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
+    "fetch-mock": "^9.11.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-redux": "^8.0.2",
